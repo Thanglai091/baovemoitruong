@@ -8,19 +8,184 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-pollution-black: #1a1a1a;
+  --color-pollution-gray: #4a4a4a;
+  --color-clean-green: #10b981;
+  --color-clean-blue: #3b82f6;
+  /* Custom Neon Palette */
+  --color-neon-red: #ff3333;
+  --color-neon-orange: #ff8533;
+  --color-neon-cyan: #00f0ff;
+  --color-neon-green: #0aff60;
+
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-heading);
+
+  --animate-glitch: glitch 1s linear infinite;
+  --animate-scanline: scanline 8s linear infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes glitch {
+
+  2%,
+  64% {
+    transform: translate(2px, 0) skew(0deg);
+  }
+
+  4%,
+  60% {
+    transform: translate(-2px, 0) skew(0deg);
+  }
+
+  62% {
+    transform: translate(0, 0) skew(5deg);
   }
 }
 
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Utility classes for Neon Text Shadow */
+.text-glow-red {
+  text-shadow: 0 0 10px rgba(255, 51, 51, 0.7), 0 0 20px rgba(255, 51, 51, 0.5);
+}
+
+.text-glow-orange {
+  text-shadow: 0 0 10px rgba(255, 133, 51, 0.7), 0 0 20px rgba(255, 133, 51, 0.5);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.7), 0 0 20px rgba(0, 240, 255, 0.5);
+}
+
+.text-glow-green {
+  text-shadow: 0 0 10px rgba(10, 255, 96, 0.7), 0 0 20px rgba(10, 255, 96, 0.5);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
+  background-color: #050505;
+}
+
+/* --- NEW ANIMATIONS FOR REDESIGN --- */
+
+/* Slide 2: Radar Pulse */
+@keyframes radar-pulse {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+.animate-radar {
+  animation: radar-pulse 3s infinite linear;
+}
+
+/* Slide 3: Glitch Clip */
+@keyframes glitch-clip {
+  0% {
+    clip-path: inset(10% 0 80% 0);
+  }
+
+  20% {
+    clip-path: inset(80% 0 10% 0);
+  }
+
+  40% {
+    clip-path: inset(40% 0 20% 0);
+  }
+
+  60% {
+    clip-path: inset(10% 0 50% 0);
+  }
+
+  80% {
+    clip-path: inset(70% 0 30% 0);
+  }
+
+  100% {
+    clip-path: inset(30% 0 60% 0);
+  }
+}
+
+.animate-glitch-clip {
+  animation: glitch-clip 2s infinite linear alternate-reverse;
+}
+
+/* Slide 3: Hazard Stripes */
+.bg-hazard-stripes {
+  background-image: repeating-linear-gradient(45deg,
+      #eab308 0,
+      #eab308 10px,
+      #000 10px,
+      #000 20px);
+}
+
+/* Slide 5: ECG Line */
+@keyframes ecg-draw {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-ecg {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: ecg-draw 4s linear infinite;
+}
+
+/* Slide 6: Stock Ticker */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 15s linear infinite;
+  white-space: nowrap;
+}
+
+/* Slide 10: Tunnel Effect */
+@keyframes tunnel-zoom {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+    border-color: rgba(10, 255, 96, 0.1);
+  }
+
+  50% {
+    opacity: 1;
+    border-color: rgba(10, 255, 96, 0.8);
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+    border-color: rgba(10, 255, 96, 0);
+  }
+}
+
+.animate-tunnel {
+  animation: tunnel-zoom 4s infinite linear;
 }
