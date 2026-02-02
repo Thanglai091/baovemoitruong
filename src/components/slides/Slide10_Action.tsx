@@ -1,10 +1,17 @@
 import { motion } from "framer-motion";
 import ParticleBackground from "@/components/visuals/ParticleBackground";
+import { useState } from "react";
+import QuizModal from "@/components/ui/QuizModal";
 
 export default function Slide10_Action() {
+    const [showQuiz, setShowQuiz] = useState(false);
+
     return (
         <section className="relative h-screen w-full snap-start flex items-center justify-center bg-black overflow-hidden align-middle">
             <ParticleBackground color="bg-neon-green" />
+
+            {/* Quiz Modal */}
+            <QuizModal isOpen={showQuiz} onClose={() => setShowQuiz(false)} />
 
             {/* TUNNEL EFFECT */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -36,9 +43,10 @@ export default function Slide10_Action() {
                 </p>
 
                 <motion.button
+                    onClick={() => setShowQuiz(true)}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
-                    className="relative group px-16 py-8 bg-transparent overflow-hidden rounded-full"
+                    className="relative group px-16 py-8 bg-transparent overflow-hidden rounded-full cursor-pointer z-50"
                 >
                     <div className="absolute inset-0 w-full h-full bg-neon-green opacity-20 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
                     <div className="absolute inset-0 w-full h-full border-2 border-neon-green rounded-full shadow-[0_0_30px_#0aff60]" />
